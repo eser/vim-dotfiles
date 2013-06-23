@@ -31,22 +31,15 @@ Bundle 'Raimondi/delimitMate'
 Bundle 'kien/rainbow_parentheses.vim'
 Bundle 'sophacles/vim-bundle-sparkup'
 Bundle 'kien/ctrlp.vim'
+Bundle 'scrooloose/nerdtree'
 
 " Syntaxes and such.
 Bundle 'tpope/vim-cucumber'
 Bundle 'leshill/vim-json'
-Bundle 'tpope/vim-liquid'
-Bundle 'puppetlabs/puppet-syntax-vim'
-Bundle 'tpope/vim-haml'
 Bundle 'kchmck/vim-coffee-script'
 Bundle 'plasticboy/vim-markdown'
-Bundle 'groenewege/vim-less'
 Bundle 'othree/html5.vim'
-Bundle 'mutewinter/nginx.vim'
-Bundle 'msanders/cocoa.vim'
-Bundle 'empanda/vim-varnish'
 Bundle 'itspriddle/vim-jquery'
-Bundle 'atourino/jinja.vim'
 
 " Python bundles
 Bundle 'nvie/vim-flake8'
@@ -99,6 +92,7 @@ if !has("gui_running")
     "colorscheme chance-of-storm
     colorscheme solarized
 else
+    set background=light
     colorscheme solarized
 endif
 
@@ -123,7 +117,7 @@ set undolevels=1000      " use many muchos levels of undo
 set title                " change the terminal's title
 set visualbell           " don't beep
 set noerrorbells         " don't beep
-set guifont=Menlo\ for\ Powerline:h11
+" set guifont=Menlo\ for\ Powerline:h11
 
 " Remove the toolbar if we're running under a GUI (e.g. MacVIM).
 if has("gui_running")
