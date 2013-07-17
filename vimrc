@@ -20,26 +20,27 @@ Bundle 'gmarik/vundle'
 Bundle 'tpope/vim-fugitive'
 
 " System
-Bundle 'mattn/webapi-vim'
-Bundle 'vim-scripts/Gist.vim'
-Bundle 'majutsushi/tagbar'
+Bundle 'kien/ctrlp.vim'
 Bundle 'mileszs/ack.vim'
-Bundle 'scrooloose/nerdcommenter'
+Bundle 'mattn/webapi-vim'
+Bundle 'majutsushi/tagbar'
 Bundle 'tpope/vim-surround'
+Bundle 'scrooloose/nerdtree'
 Bundle 'scrooloose/syntastic'
 Bundle 'Raimondi/delimitMate'
+Bundle 'vim-scripts/Gist.vim'
+Bundle 'scrooloose/nerdcommenter'
 Bundle 'kien/rainbow_parentheses.vim'
 Bundle 'sophacles/vim-bundle-sparkup'
-Bundle 'kien/ctrlp.vim'
-Bundle 'scrooloose/nerdtree'
 
 " Syntaxes and such.
-Bundle 'tpope/vim-cucumber'
 Bundle 'leshill/vim-json'
-Bundle 'kchmck/vim-coffee-script'
-Bundle 'plasticboy/vim-markdown'
 Bundle 'othree/html5.vim'
+Bundle 'garbas/vim-snipmate'
 Bundle 'itspriddle/vim-jquery'
+" Bundle 'tpope/vim-cucumber'
+" Bundle 'plasticboy/vim-markdown'
+" Bundle 'kchmck/vim-coffee-script'
 
 " Python bundles
 Bundle 'nvie/vim-flake8'
@@ -48,19 +49,18 @@ Bundle 'vim-scripts/python_match.vim'
 Bundle 'jmcantrell/vim-virtualenv'
 
 " Ruby specific
-Bundle "vim-ruby/vim-ruby"
+Bundle 'vim-ruby/vim-ruby'
 Bundle 'tpope/vim-endwise'
 
 " Fun, but not useful
-Bundle 'altercation/vim-colors-solarized'
-Bundle 'skammer/vim-css-color'
 Bundle 'mgutz/vim-colors'
-Bundle 'ehamberg/vim-cute-python'
 Bundle 'Lokaltog/powerline'
+Bundle 'skammer/vim-css-color'
+Bundle 'ehamberg/vim-cute-python'
 Bundle 'chriskempson/base16-vim'
 Bundle 'chreekat/vim-paren-crosshairs'
+Bundle 'altercation/vim-colors-solarized'
 
-filetype plugin indent on     " required!
 
 " Configurations
 """"""""""""""""
@@ -97,7 +97,9 @@ else
 endif
 
 " Basic
-syntax enable
+syntax on
+filetype plugin indent on     " required!
+
 set number        " always show line numbers
 set hidden        " Allow un-saved buffers in background
 set clipboard=unnamed " Share system clipboard.
@@ -117,7 +119,11 @@ set undolevels=1000      " use many muchos levels of undo
 set title                " change the terminal's title
 set visualbell           " don't beep
 set noerrorbells         " don't beep
-" set guifont=Menlo\ for\ Powerline:h11
+
+" Powerline settings
+set guifont=Inconsolata-dz\ for\ Powerline\ Medium\ 12
+let g:Powerline_symbols = 'fancy'
+let g:CSSLint_FileTypeList = ['css', 'less', 'sess']
 
 " Remove the toolbar if we're running under a GUI (e.g. MacVIM).
 if has("gui_running")
@@ -137,6 +143,7 @@ set smarttab      " insert tabs on the start of a line according to
                   "    shiftwidth, not tabstop
 set autoindent    " always set autoindenting on
 set copyindent    " copy the previous indentation on autoindenting
+set smartindent
 
 " General Code Folding
 """"""""""""""""""""""
@@ -209,6 +216,8 @@ autocmd FileType python map <buffer> <F4> :call Flake8()<CR>
 autocmd FileType python autocmd BufWritePre * :%s/\s\+$//e
 autocmd FileType python set omnifunc=pythoncomplete#Complete
 
+autocmd FileType python set ft=python.django " For SnipMate
+autocmd FileType html set ft=htmldjango.html " For SnipMate
 " Coffeescript configurations
 """""""""""""""""""""""""""""
 au BufNewFile,BufReadPost *.coffee setlocal foldmethod=indent
@@ -217,6 +226,11 @@ au BufNewFile,BufReadPost *.coffee setlocal shiftwidth=2 expandtab
 " Javascript configurations
 """""""""""""""""""""""""""
 au BufNewFile,BufReadPost *.js setlocal shiftwidth=2 expandtab
+
+" Vim JavaScript Configuration
+let g:html_indent_inctags = "html,body,head,tbody"
+let g:html_indent_script1 = "inc"
+let g:html_indent_style1 = "inc"
 
 " Puppet configurations
 """""""""""""""""""""""
@@ -227,6 +241,8 @@ au BufNewFile,BufReadPost *.jinja.html setlocal filetype=htmljinja
 
 " Make sure we hilight extra whitespace in the most annoying way possible.
 highlight ExtraWhitespace ctermbg=red guibg=red
+" highlight Normal ctermfg=grey ctermbg=darkblue
+
 match ExtraWhitespace /\s\+$/
 autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
 autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
@@ -301,3 +317,8 @@ let g:syntastic_puppet_lint_disable = 0
 
 " Powerline
 set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim
+
+" Shorcuts
+:imap jj <Esc> " Exit from insert mode
+map ,w :w!<CR>
+map ,q :q!<CR>
