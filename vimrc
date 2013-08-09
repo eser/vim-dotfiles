@@ -32,6 +32,7 @@ Bundle 'vim-scripts/Gist.vim'
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'kien/rainbow_parentheses.vim'
 Bundle 'sophacles/vim-bundle-sparkup'
+Bundle 'MarcWeber/vim-addon-mw-utils'
 
 " Syntaxes and such.
 Bundle 'leshill/vim-json'
