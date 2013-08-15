@@ -33,6 +33,9 @@ Bundle 'scrooloose/nerdcommenter'
 Bundle 'kien/rainbow_parentheses.vim'
 Bundle 'sophacles/vim-bundle-sparkup'
 Bundle 'MarcWeber/vim-addon-mw-utils'
+Bundle 'tomtom/tlib_vim'
+Bundle 'honza/vim-snippets'
+Bundle 'AutoComplPop'
 
 " Syntaxes and such.
 Bundle 'leshill/vim-json'
@@ -122,7 +125,8 @@ set visualbell           " don't beep
 set noerrorbells         " don't beep
 
 " Powerline settings
-set guifont=Inconsolata-dz\ for\ Powerline\ Medium\ 12
+" set guifont=Inconsolata-dz\ for\ Powerline\ Medium\ 12
+set guifont=Ubuntu\ Mono\ for\ Powerline:h13
 let g:Powerline_symbols = 'fancy'
 let g:CSSLint_FileTypeList = ['css', 'less', 'sess']
 
@@ -208,6 +212,7 @@ autocmd FileType php setlocal colorcolumn=100
 " HTML configurations
 """""""""""""""""""""
 autocmd FileType html setlocal shiftwidth=4 tabstop=4 softtabstop=4 noexpandtab
+autocmd FileType htmldjango setlocal shiftwidth=4 tabstop=4 softtabstop=4 noexpandtab
 
 " Python configurations
 """""""""""""""""""""""
@@ -218,6 +223,7 @@ autocmd FileType python autocmd BufWritePre * :%s/\s\+$//e
 autocmd FileType python set omnifunc=pythoncomplete#Complete
 
 autocmd FileType python set ft=python.django " For SnipMate
+autocmd FileType htmldjango set ft=htmldjango.html " For SnipMate
 autocmd FileType html set ft=htmldjango.html " For SnipMate
 " Coffeescript configurations
 """""""""""""""""""""""""""""
@@ -318,6 +324,9 @@ let g:syntastic_puppet_lint_disable = 0
 
 " Powerline
 set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim
+
+" Navigation
+set scrolloff=8
 
 " Shorcuts
 :imap jj <Esc> " Exit from insert mode
