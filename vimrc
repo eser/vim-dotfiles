@@ -211,8 +211,8 @@ autocmd FileType php setlocal colorcolumn=100
 
 " HTML configurations
 """""""""""""""""""""
-autocmd FileType html setlocal shiftwidth=4 tabstop=4 softtabstop=4 noexpandtab
-autocmd FileType htmldjango setlocal shiftwidth=4 tabstop=4 softtabstop=4 noexpandtab
+autocmd FileType html setlocal shiftwidth=2 expandtab tabstop=2 softtabstop=2
+autocmd FileType htmldjango setlocal shiftwidth=2 expandtab tabstop=2 softtabstop=2
 
 " Python configurations
 """""""""""""""""""""""
@@ -327,8 +327,18 @@ set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim
 
 " Navigation
 set scrolloff=8
+nmap <C-k> 5k
+nmap <C-j> 5j
 
 " Shorcuts
 :imap jj <Esc> " Exit from insert mode
 map ,w :w!<CR>
 map ,q :q!<CR>
+
+" Bubble single lines
+" nmap <C-Up> [e
+" nmap <C-Down> ]e
+" Bubble multiple lines
+" vmap <C-Up> [egv
+" vmap <C-Down> ]egv
+
