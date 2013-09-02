@@ -238,6 +238,14 @@ autocmd FileType python set omnifunc=pythoncomplete#Complete
 autocmd FileType python set ft=python.django " For SnipMate
 autocmd FileType htmldjango set ft=htmldjango.html " For SnipMate
 autocmd FileType html set ft=htmldjango.html " For SnipMate
+
+" CSS Configurations
+"""""""""""""""""""""""""""""
+autocmd FileType scss set ft=scss.css " For SnipMate
+autocmd FileType sass set ft=sass.css " For SnipMate
+autocmd FileType css set csscomplete#CompleteCSS
+
+
 " Coffeescript configurations
 """""""""""""""""""""""""""""
 au BufNewFile,BufReadPost *.coffee setlocal foldmethod=indent
@@ -248,6 +256,7 @@ au BufNewFile,BufReadPost *.coffee setlocal shiftwidth=2 expandtab
 au BufNewFile,BufReadPost *.js setlocal shiftwidth=2 expandtab
 
 " Vim JavaScript Configuration
+"""""""""""""""""""""""""""
 let g:html_indent_inctags = "html,body,head,tbody"
 let g:html_indent_script1 = "inc"
 let g:html_indent_style1 = "inc"
