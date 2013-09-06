@@ -46,15 +46,17 @@ Bundle 'itspriddle/vim-jquery'
 " Bundle 'plasticboy/vim-markdown'
 " Bundle 'kchmck/vim-coffee-script'
 
-" Python bundles
+" Python & Django bundles
 Bundle 'nvie/vim-flake8'
 Bundle 'fs111/pydoc.vim'
 Bundle 'vim-scripts/python_match.vim'
 Bundle 'jmcantrell/vim-virtualenv'
 
-" Ruby specific
+" Ruby & Rails bundles
 Bundle 'vim-ruby/vim-ruby'
 Bundle 'tpope/vim-endwise'
+Bundle 'tpope/vim-rails'
+Bundle 'tpope/vim-bundler'
 
 " Fun, but not useful
 Bundle 'mgutz/vim-colors'
@@ -208,8 +210,19 @@ endfunction
 
 " Ruby Configurations
 """""""""""""""""""""
-autocmd Filetype ruby setlocal noexpandtab shiftwidth=2 tabstop=2
+autocmd filetype ruby setlocal expandtab shiftwidth=2 tabstop=2 softtabstop=2
 autocmd Filetype eruby setlocal noexpandtab shiftwidth=2 tabstop=2
+autocmd FileType cucumber compiler cucumber | setl makeprg=cucumber\ \"%:p\"
+autocmd FileType ruby
+      \ if expand('%') =~# '_test\.rb$' |
+      \   compiler rubyunit | setl makeprg=testrb\ \"%:p\" |
+      \ elseif expand('%') =~# '_spec\.rb$' |
+      \   compiler rspec | setl makeprg=rspec\ \"%:p\" |
+      \ else |
+      \   compiler ruby | setl makeprg=ruby\ -wc\ \"%:p\" |
+      \ endif
+autocmd User Bundler
+            \ if &makeprg !~# 'bundle' | setl makeprg^=bundle\ exec\  | endif
 
 " PHP Configurations
 """"""""""""""""""""
