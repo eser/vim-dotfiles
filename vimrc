@@ -211,7 +211,7 @@ endfunction
 " Ruby Configurations
 """""""""""""""""""""
 autocmd filetype ruby setlocal expandtab shiftwidth=2 tabstop=2 softtabstop=2
-autocmd Filetype eruby setlocal noexpandtab shiftwidth=2 tabstop=2
+autocmd Filetype eruby setlocal expandtab shiftwidth=2 tabstop=2
 autocmd FileType cucumber compiler cucumber | setl makeprg=cucumber\ \"%:p\"
 autocmd FileType ruby
       \ if expand('%') =~# '_test\.rb$' |
