@@ -126,7 +126,12 @@ set noerrorbells         " don't beep
 
 " Powerline settings
 " set guifont=Inconsolata-dz\ for\ Powerline\ Medium\ 12
-set guifont=Ubuntu\ Mono\ for\ Powerline:h13
+if has("gui_gtk2")
+    set guifont=Ubuntu\ Mono\ for\ Powerline\ 12
+elseif has("gui_macvim")
+    set guifont=Ubuntu\ Mono\ for\ Powerline:h13
+endif
+
 let g:Powerline_symbols = 'fancy'
 let g:CSSLint_FileTypeList = ['css', 'less', 'sess']
 
@@ -203,7 +208,8 @@ endfunction
 
 " Ruby Configurations
 """""""""""""""""""""
-autocmd filetype ruby setlocal noexpandtab shiftwidth=2 tabstop=2
+autocmd Filetype ruby setlocal noexpandtab shiftwidth=2 tabstop=2
+autocmd Filetype eruby setlocal noexpandtab shiftwidth=2 tabstop=2
 
 " PHP Configurations
 """"""""""""""""""""
