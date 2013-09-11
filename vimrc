@@ -362,6 +362,7 @@ nmap <C-j> 5j
 :imap jj <Esc> " Exit from insert mode
 map ,w :w!<CR>
 map ,q :q!<CR>
+map ,e :NERDTreeToggle<CR>
 
 " Bubble single lines
 " nmap <C-Up> [e
