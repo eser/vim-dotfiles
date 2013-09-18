@@ -249,7 +249,7 @@ autocmd FileType html set ft=htmldjango.html " For SnipMate
 """""""""""""""""""""""""""""
 autocmd FileType scss set ft=scss.css " For SnipMate
 autocmd FileType sass set ft=sass.css " For SnipMate
-autocmd FileType css set csscomplete#CompleteCSS
+autocmd FileType css set omnifunc=csscomplete#CompleteCSS
 
 
 " Coffeescript configurations
