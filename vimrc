@@ -131,7 +131,7 @@ set noerrorbells         " don't beep
 if has("gui_gtk2")
     set guifont=Ubuntu\ Mono\ for\ Powerline\ 12
 elseif has("gui_macvim")
-    set guifont=Ubuntu\ Mono\ for\ Powerline:h13
+    set guifont=Ubuntu\ Mono\ derivative\ Powerline:h14
 endif
 
 let g:Powerline_symbols = 'fancy'
