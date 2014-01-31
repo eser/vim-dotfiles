@@ -26,14 +26,14 @@ Bundle 'mileszs/ack.vim'
 Bundle 'majutsushi/tagbar'
 Bundle 'tpope/vim-surround'
 Bundle 'scrooloose/nerdtree'
-Bundle 'scrooloose/syntastic'
+" Bundle 'scrooloose/syntastic'
 " Bundle 'Raimondi/delimitMate'
 " Bundle 'vim-scripts/Gist.vim'
 " Bundle 'scrooloose/nerdcommenter'
-" Bundle 'kien/rainbow_parentheses.vim'
+Bundle 'kien/rainbow_parentheses.vim'
 " Bundle 'sophacles/vim-bundle-sparkup'
-" Bundle 'MarcWeber/vim-addon-mw-utils'
-" Bundle 'tomtom/tlib_vim'
+Bundle 'MarcWeber/vim-addon-mw-utils'
+Bundle 'tomtom/tlib_vim'
 Bundle 'honza/vim-snippets'
 Bundle 'AutoComplPop'
 
@@ -235,19 +235,19 @@ autocmd FileType php setlocal colorcolumn=100
 " HTML configurations
 """""""""""""""""""""
 autocmd FileType html setlocal shiftwidth=2 expandtab tabstop=2 softtabstop=2
-autocmd FileType htmldjango setlocal shiftwidth=2 expandtab tabstop=2 softtabstop=2
+" autocmd FileType htmldjango setlocal shiftwidth=2 expandtab tabstop=2 softtabstop=2
 
 " Python configurations
 """""""""""""""""""""""
-autocmd FileType python setlocal shiftwidth=4 expandtab tabstop=4 softtabstop=4
-autocmd FileType python setlocal colorcolumn=80
-autocmd FileType python map <buffer> <F4> :call Flake8()<CR>
-autocmd FileType python autocmd BufWritePre * :%s/\s\+$//e
-autocmd FileType python set omnifunc=pythoncomplete#Complete
-
-autocmd FileType python set ft=python.django " For SnipMate
-autocmd FileType htmldjango set ft=htmldjango.html " For SnipMate
-autocmd FileType html set ft=htmldjango.html " For SnipMate
+" autocmd FileType python setlocal shiftwidth=4 expandtab tabstop=4 softtabstop=4
+" autocmd FileType python setlocal colorcolumn=80
+" autocmd FileType python map <buffer> <F4> :call Flake8()<CR>
+" autocmd FileType python autocmd BufWritePre * :%s/\s\+$//e
+" autocmd FileType python set omnifunc=pythoncomplete#Complete
+"
+" autocmd FileType python set ft=python.django " For SnipMate
+" autocmd FileType htmldjango set ft=htmldjango.html " For SnipMate
+" autocmd FileType html set ft=htmldjango.html " For SnipMate
 
 " CSS Configurations
 """""""""""""""""""""""""""""
@@ -271,13 +271,6 @@ let g:html_indent_inctags = "html,body,head,tbody"
 let g:html_indent_script1 = "inc"
 let g:html_indent_style1 = "inc"
 
-" Puppet configurations
-"""""""""""""""""""""""
-au FileType puppet setlocal noexpandtab
-
-" Get jinja filetype selection working correctly for *.jinja.html files.
-au BufNewFile,BufReadPost *.jinja.html setlocal filetype=htmljinja
-
 " Make sure we hilight extra whitespace in the most annoying way possible.
 highlight ExtraWhitespace ctermbg=red guibg=red
 " highlight Normal ctermfg=grey ctermbg=darkblue
@@ -290,7 +283,7 @@ autocmd InsertLeave * match ExtraWhitespace /\s\+$/
 " Custom mappings
 """"""""""""""""""
 
-" Genral
+" General
 noremap <silent> <F4> :QFix<CR>
 
 
@@ -310,14 +303,8 @@ cmap w!! w !sudo tee % >/dev/null
 
 " Pyflakes
 "autocmd BufWritePost *.py call Flake8()
-let g:flake8_ignore="E128,E501"
-let g:syntastic_python_checker_args='--ignore=E501,E128'
-
-" Gist
-let g:gist_clip_command = 'pbcopy'
-let g:gist_detect_filetype = 2
-let g:gist_show_privates = 1
-let g:gist_post_private = 1
+" let g:flake8_ignore="E128,E501"
+" let g:syntastic_python_checker_args='--ignore=E501,E128'
 
 " TaskList
 "map <leader>l <Plug>TaskList
@@ -337,22 +324,22 @@ let g:ctrlp_user_command = ['.git/', 'cd %s && git ls-files --exclude-standard -
 let g:snippets_dir = "~/.vim/bundle/snipmate-snippets"
 
 " Sparkup
-let g:sparkupExecuteMapping = '<c-y>'
-let g:sparkupNextMapping = '<c-k>'
+" let g:sparkupExecuteMapping = '<c-y>'
+" let g:sparkupNextMapping = '<c-k>'
 
 " Jedi
-let g:jedi#goto_command = "<leader>g"
+" let g:jedi#goto_command = "<leader>g"
 
 " Double rainbow - What does it mean!?
-au VimEnter * RainbowParenthesesToggle
-au Syntax * RainbowParenthesesLoadRound
-au Syntax * RainbowParenthesesLoadSquare
-au Syntax * RainbowParenthesesLoadBraces
+" au VimEnter * RainbowParenthesesToggle
+" au Syntax * RainbowParenthesesLoadRound
+" au Syntax * RainbowParenthesesLoadSquare
+" au Syntax * RainbowParenthesesLoadBraces
 
 set laststatus=2
-let g:syntastic_enable_signs = 1
-let g:syntastic_auto_jump = 0
-let g:syntastic_puppet_lint_disable = 0
+" let g:syntastic_enable_signs = 1
+" let g:syntastic_auto_jump = 0
+" let g:syntastic_puppet_lint_disable = 0
 
 " Powerline
 set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim
