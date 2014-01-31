@@ -361,4 +361,3 @@ map ,e :NERDTreeToggle<CR>
 " Bubble multiple lines
 " vmap <C-Up> [egv
 " vmap <C-Down> ]egv
-
