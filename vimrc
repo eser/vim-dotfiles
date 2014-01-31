@@ -17,60 +17,62 @@ Bundle 'gmarik/vundle'
 
 
 " VCS
-Bundle 'tpope/vim-fugitive'
+" Bundle 'tpope/vim-fugitive'
 
 " System
 Bundle 'kien/ctrlp.vim'
 Bundle 'mileszs/ack.vim'
-Bundle 'mattn/webapi-vim'
+" Bundle 'mattn/webapi-vim'
 Bundle 'majutsushi/tagbar'
 Bundle 'tpope/vim-surround'
 Bundle 'scrooloose/nerdtree'
 Bundle 'scrooloose/syntastic'
-Bundle 'Raimondi/delimitMate'
-Bundle 'vim-scripts/Gist.vim'
-Bundle 'scrooloose/nerdcommenter'
-Bundle 'kien/rainbow_parentheses.vim'
-Bundle 'sophacles/vim-bundle-sparkup'
-Bundle 'MarcWeber/vim-addon-mw-utils'
-Bundle 'tomtom/tlib_vim'
+" Bundle 'Raimondi/delimitMate'
+" Bundle 'vim-scripts/Gist.vim'
+" Bundle 'scrooloose/nerdcommenter'
+" Bundle 'kien/rainbow_parentheses.vim'
+" Bundle 'sophacles/vim-bundle-sparkup'
+" Bundle 'MarcWeber/vim-addon-mw-utils'
+" Bundle 'tomtom/tlib_vim'
 Bundle 'honza/vim-snippets'
 Bundle 'AutoComplPop'
 
 " Syntaxes and such.
 Bundle 'leshill/vim-json'
-Bundle 'othree/html5.vim'
+" Bundle 'othree/html5.vim'
 Bundle 'garbas/vim-snipmate'
 Bundle 'itspriddle/vim-jquery'
 " Bundle 'tpope/vim-cucumber'
-" Bundle 'plasticboy/vim-markdown'
-" Bundle 'kchmck/vim-coffee-script'
+Bundle 'plasticboy/vim-markdown'
+Bundle 'kchmck/vim-coffee-script'
+Bundle 'mustache/vim-mustache-handlebars'
+" Bundle 'dsawardekar/ember.vim'
 
 " Python & Django bundles
-Bundle 'nvie/vim-flake8'
-Bundle 'fs111/pydoc.vim'
-Bundle 'vim-scripts/python_match.vim'
-Bundle 'jmcantrell/vim-virtualenv'
+" Bundle 'nvie/vim-flake8'
+" Bundle 'fs111/pydoc.vim'
+" Bundle 'vim-scripts/python_match.vim'
+" Bundle 'jmcantrell/vim-virtualenv'
 
 " Ruby & Rails bundles
 Bundle 'vim-ruby/vim-ruby'
 Bundle 'tpope/vim-endwise'
-Bundle 'tpope/vim-rails'
-Bundle 'tpope/vim-bundler'
+" Bundle 'tpope/vim-rails'
+" Bundle 'tpope/vim-bundler'
 
 " Fun, but not useful
 Bundle 'mgutz/vim-colors'
 Bundle 'Lokaltog/powerline'
 Bundle 'skammer/vim-css-color'
-Bundle 'ehamberg/vim-cute-python'
-Bundle 'chriskempson/base16-vim'
-Bundle 'chreekat/vim-paren-crosshairs'
+" Bundle 'ehamberg/vim-cute-python'
+" Bundle 'chriskempson/base16-vim'
+" Bundle 'chreekat/vim-paren-crosshairs'
 Bundle 'altercation/vim-colors-solarized'
 
 
 " Configurations
 """"""""""""""""
-set background=dark
+set background=light
 
 " Wildmenu completion
 """""""""""""""""""""
@@ -95,10 +97,10 @@ au TabLeave * silent! :wa
 au VimResized * exe "normal! \<c-w>="
 
 if !has("gui_running")
-    "colorscheme chance-of-storm
-    colorscheme solarized
+    set background=dark
+    colorscheme desert
 else
-    set background=light
+    set background=dark
     colorscheme solarized
 endif
 
@@ -180,6 +182,8 @@ autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
 " Get rid of trailing whitespace highlighting in mutt.
 autocmd FileType mail highlight clear ExtraWhitespace
 autocmd FileType mail setlocal listchars=
+
+let g:mustache_abbreviations = 1
 
 " Reformat XML files
 au FileType xml exe ":silent 1,$!xmllint --format --recover - 2>/dev/null"

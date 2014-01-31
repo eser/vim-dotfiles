@@ -2,9 +2,15 @@
 
 ZSH=$HOME/.oh-my-zsh
 
-export PATH=/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin:/opt/ImageMagick/bin:/opt/local/bin:/usr/local/mysql/bin:$HOME/.rbenv/bin
-export PATH=/usr/local/bin:$PATH
+export ORACLE_HOME=/usr/local/oracle/instantclient11_2
+export DYLD_LIBRARY_PATH=$ORACLE_HOME
+export SQLPATH=$ORACLE_HOME
+export TNS_ADMIN=$ORACLE_HOME/admin
+
+export PATH=:/usr/local/bin:$PATH:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/opt/ImageMagick/bin:/opt/local/bin:/usr/local/mysql/bin:$ORACLE_HOME
 export PGHOST=localhost
+
+umask 0002
 
 # Python
 export WORKON_HOME=$HOME/.virtualenvs
@@ -26,7 +32,7 @@ fi
 ZSH_THEME="agnoster"
 
 # Example aliases
-# alias zshconfig="mate ~/.zshrc"
+alias zshconfig="vim ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 # Set to this to use case-sensitive completion
@@ -50,10 +56,13 @@ ZSH_THEME="agnoster"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git virtualenv virtualenvwrapper brew bundler lol osx pip sublime rvm ruby rails)
+plugins=(git virtualenv virtualenvwrapper brew bundler lol osx pip sublime rvm ruby rails autojump)
 
 source $ZSH/oh-my-zsh.sh
 
 # Customize to your needs...
 
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
+[[ -s `brew --prefix`/etc/autojump.sh ]] && . `brew --prefix`/etc/autojump.sh
+
+PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
