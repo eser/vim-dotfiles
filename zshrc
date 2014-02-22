@@ -6,6 +6,7 @@ export ORACLE_HOME=/usr/local/oracle/instantclient11_2
 export DYLD_LIBRARY_PATH=$ORACLE_HOME
 export SQLPATH=$ORACLE_HOME
 export TNS_ADMIN=$ORACLE_HOME/admin
+export EDITOR=vim
 
 export PATH=:/usr/local/bin:$PATH:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/opt/ImageMagick/bin:/opt/local/bin:/usr/local/mysql/bin:$ORACLE_HOME
 export PGHOST=localhost
