@@ -2,73 +2,74 @@ set encoding=utf-8
 set nocompatible               " be iMproved
 filetype off                   " required!
 
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
 
 " let Vundle manage Vundle
-Bundle 'gmarik/vundle'
+Plugin 'gmarik/Vundle.vim'
 
 " Vundle help
 """"""""""""""
-" :BundleList          - list configured bundles
-" :BundleInstall(!)    - install(update) bundles
-" :BundleSearch(!) foo - search(or refresh cache first) for foo
-" :BundleClean(!)      - confirm(or auto-approve) removal of unused bundles
+" :PluginList          - list configured bundles
+" :PluginInstall(!)    - install(update) bundles
+" :PluginSearch(!) foo - search(or refresh cache first) for foo
+" :PluginClean(!)      - confirm(or auto-approve) removal of unused bundles
 
+Plugin 'godlygeek/tabular'
 
 " VCS
-" Bundle 'tpope/vim-fugitive'
+" Plugin 'tpope/vim-fugitive'
 
 " System
-Bundle 'kien/ctrlp.vim'
-Bundle 'mileszs/ack.vim'
-" Bundle 'mattn/webapi-vim'
-Bundle 'majutsushi/tagbar'
-Bundle 'tpope/vim-surround'
-Bundle 'Raimondi/delimitMate'
-" Bundle 'vim-scripts/Gist.vim'
-" Bundle 'scrooloose/syntastic'
-" Bundle 'scrooloose/nerdcommenter'
-Bundle 'scrooloose/nerdtree'
-Bundle 'kien/rainbow_parentheses.vim'
-" Bundle 'sophacles/vim-bundle-sparkup'
-Bundle 'MarcWeber/vim-addon-mw-utils'
-Bundle 'tomtom/tlib_vim'
-Bundle 'honza/vim-snippets'
-Bundle 'AutoComplPop'
+Plugin 'kien/ctrlp.vim'
+Plugin 'mileszs/ack.vim'
+" Plugin 'mattn/webapi-vim'
+Plugin 'majutsushi/tagbar'
+Plugin 'tpope/vim-surround'
+Plugin 'Raimondi/delimitMate'
+" Plugin 'vim-scripts/Gist.vim'
+" Plugin 'scrooloose/syntastic'
+" Plugin 'scrooloose/nerdcommenter'
+Plugin 'scrooloose/nerdtree'
+Plugin 'kien/rainbow_parentheses.vim'
+" Plugin 'sophacles/vim-bundle-sparkup'
+Plugin 'MarcWeber/vim-addon-mw-utils'
+Plugin 'tomtom/tlib_vim'
+Plugin 'honza/vim-snippets'
+Plugin 'AutoComplPop'
 
 " Syntaxes and such.
-Bundle 'leshill/vim-json'
-" Bundle 'othree/html5.vim'
-Bundle 'garbas/vim-snipmate'
-Bundle 'itspriddle/vim-jquery'
-" Bundle 'tpope/vim-cucumber'
-Bundle 'plasticboy/vim-markdown'
-Bundle 'kchmck/vim-coffee-script'
-Bundle 'mustache/vim-mustache-handlebars'
-" Bundle 'dsawardekar/ember.vim'
+Plugin 'leshill/vim-json'
+" Plugin 'othree/html5.vim'
+Plugin 'garbas/vim-snipmate'
+Plugin 'itspriddle/vim-jquery'
+" Plugin 'tpope/vim-cucumber'
+Plugin 'plasticboy/vim-markdown'
+Plugin 'kchmck/vim-coffee-script'
+Plugin 'mustache/vim-mustache-handlebars'
+" Plugin 'dsawardekar/ember.vim'
 
 " Python & Django bundles
-" Bundle 'nvie/vim-flake8'
-" Bundle 'fs111/pydoc.vim'
-" Bundle 'vim-scripts/python_match.vim'
-" Bundle 'jmcantrell/vim-virtualenv'
+" Plugin 'nvie/vim-flake8'
+" Plugin 'fs111/pydoc.vim'
+" Plugin 'vim-scripts/python_match.vim'
+" Plugin 'jmcantrell/vim-virtualenv'
 
 " Ruby & Rails bundles
-Bundle 'vim-ruby/vim-ruby'
-Bundle 'tpope/vim-endwise'
-" Bundle 'tpope/vim-rails'
-" Bundle 'tpope/vim-bundler'
+Plugin 'vim-ruby/vim-ruby'
+Plugin 'tpope/vim-endwise'
+" Plugin 'tpope/vim-rails'
+" Plugin 'tpope/vim-bundler'
 
 " Fun, but not useful
-Bundle 'mgutz/vim-colors'
-Bundle 'Lokaltog/powerline'
-Bundle 'skammer/vim-css-color'
-" Bundle 'ehamberg/vim-cute-python'
-" Bundle 'chriskempson/base16-vim'
-" Bundle 'chreekat/vim-paren-crosshairs'
-Bundle 'altercation/vim-colors-solarized'
+Plugin 'mgutz/vim-colors'
+Plugin 'skammer/vim-css-color'
+" Plugin 'ehamberg/vim-cute-python'
+" Plugin 'chriskempson/base16-vim'
+" Plugin 'chreekat/vim-paren-crosshairs'
+Plugin 'altercation/vim-colors-solarized'
 
+call vundle#end()            " required
 
 " Configurations
 """"""""""""""""
@@ -128,15 +129,6 @@ set title                " change the terminal's title
 set visualbell           " don't beep
 set noerrorbells         " don't beep
 
-" Powerline settings
-" set guifont=Inconsolata-dz\ for\ Powerline\ Medium\ 12
-if has("gui_gtk2")
-    set guifont=Ubuntu\ Mono\ for\ Powerline\ 12
-elseif has("gui_macvim")
-    set guifont=Ubuntu\ Mono\ derivative\ Powerline:h14
-endif
-
-let g:Powerline_symbols = 'fancy'
 let g:CSSLint_FileTypeList = ['css', 'less', 'sess']
 
 " Remove the toolbar if we're running under a GUI (e.g. MacVIM).
@@ -340,9 +332,6 @@ set laststatus=2
 " let g:syntastic_enable_signs = 1
 " let g:syntastic_auto_jump = 0
 " let g:syntastic_puppet_lint_disable = 0
-
-" Powerline
-set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim
 
 " Navigation
 set scrolloff=8

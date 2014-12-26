@@ -2,38 +2,32 @@
 
 ZSH=$HOME/.oh-my-zsh
 
-export ORACLE_HOME=/usr/local/oracle/instantclient11_2
-export DYLD_LIBRARY_PATH=$ORACLE_HOME
-export SQLPATH=$ORACLE_HOME
-export TNS_ADMIN=$ORACLE_HOME/admin
 export EDITOR=vim
 
 export PATH=:/usr/local/bin:$PATH:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/opt/ImageMagick/bin:/opt/local/bin:/usr/local/mysql/bin:$ORACLE_HOME
-export PGHOST=localhost
-
-umask 0002
 
 # Python
-export WORKON_HOME=$HOME/.virtualenvs
-export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python2.7
-export VIRTUALENVWRAPPER_VIRTUALENV_ARGS='--no-site-packages'
-export PIP_VIRTUALENV_BASE=$WORKON_HOME
-export PIP_RESPECT_VIRTUALENV=true
+# export WORKON_HOME=$HOME/.virtualenvs
+# export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python2.7
+# export VIRTUALENVWRAPPER_VIRTUALENV_ARGS='--no-site-packages'
+# export PIP_VIRTUALENV_BASE=$WORKON_HOME
+# export PIP_RESPECT_VIRTUALENV=true
 
-if [[ -r /usr/local/bin/virtualenvwrapper.sh ]]; then
-    source /usr/local/bin/virtualenvwrapper.sh
-else
-    echo "WARNING: Can't find virtualenvwrapper.sh"
-fi
+# if [[ -r /usr/local/bin/virtualenvwrapper.sh ]]; then
+#     source /usr/local/bin/virtualenvwrapper.sh
+# else
+#     echo "WARNING: Can't find virtualenvwrapper.sh"
+# fi
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-ZSH_THEME="agnoster"
+ZSH_THEME="gallois"
 
 # Example aliases
 alias zshconfig="vim ~/.zshrc"
+alias sk="setxkbmap -option ctrl:nocaps"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 # Set to this to use case-sensitive completion
@@ -57,13 +51,13 @@ alias zshconfig="vim ~/.zshrc"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git virtualenv virtualenvwrapper brew bundler lol osx pip sublime rvm ruby rails autojump)
+plugins=(git bundler lol pip sublime rvm ruby rails autojump)
 
 source $ZSH/oh-my-zsh.sh
 
 # Customize to your needs...
 
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
-[[ -s `brew --prefix`/etc/autojump.sh ]] && . `brew --prefix`/etc/autojump.sh
 
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+setxkbmap -option ctrl:nocaps
