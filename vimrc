@@ -1,8 +1,5 @@
-set encoding=utf-8
-set nocompatible               " be iMproved
-filetype off                   " required!
-
 set rtp+=~/.vim/bundle/Vundle.vim
+
 call vundle#begin()
 
 " let Vundle manage Vundle
@@ -17,22 +14,17 @@ Plugin 'gmarik/Vundle.vim'
 
 Plugin 'godlygeek/tabular'
 
-" VCS
-" Plugin 'tpope/vim-fugitive'
+"GIT
+Plugin 'tpope/vim-fugitive'
 
 " System
 Plugin 'kien/ctrlp.vim'
 Plugin 'mileszs/ack.vim'
-" Plugin 'mattn/webapi-vim'
 Plugin 'majutsushi/tagbar'
 Plugin 'tpope/vim-surround'
 Plugin 'Raimondi/delimitMate'
-" Plugin 'vim-scripts/Gist.vim'
-" Plugin 'scrooloose/syntastic'
-" Plugin 'scrooloose/nerdcommenter'
 Plugin 'scrooloose/nerdtree'
 Plugin 'kien/rainbow_parentheses.vim'
-" Plugin 'sophacles/vim-bundle-sparkup'
 Plugin 'MarcWeber/vim-addon-mw-utils'
 Plugin 'tomtom/tlib_vim'
 Plugin 'honza/vim-snippets'
@@ -40,36 +32,34 @@ Plugin 'AutoComplPop'
 
 " Syntaxes and such.
 Plugin 'leshill/vim-json'
-" Plugin 'othree/html5.vim'
 Plugin 'garbas/vim-snipmate'
 Plugin 'itspriddle/vim-jquery'
-" Plugin 'tpope/vim-cucumber'
 Plugin 'plasticboy/vim-markdown'
 Plugin 'kchmck/vim-coffee-script'
 Plugin 'mustache/vim-mustache-handlebars'
-" Plugin 'dsawardekar/ember.vim'
-
-" Python & Django bundles
-" Plugin 'nvie/vim-flake8'
-" Plugin 'fs111/pydoc.vim'
-" Plugin 'vim-scripts/python_match.vim'
-" Plugin 'jmcantrell/vim-virtualenv'
 
 " Ruby & Rails bundles
 Plugin 'vim-ruby/vim-ruby'
 Plugin 'tpope/vim-endwise'
-" Plugin 'tpope/vim-rails'
+Plugin 'tpope/vim-rails'
 " Plugin 'tpope/vim-bundler'
 
 " Fun, but not useful
 Plugin 'mgutz/vim-colors'
 Plugin 'skammer/vim-css-color'
-" Plugin 'ehamberg/vim-cute-python'
 " Plugin 'chriskempson/base16-vim'
 " Plugin 'chreekat/vim-paren-crosshairs'
 Plugin 'altercation/vim-colors-solarized'
 
+" Window & Tabs
+Plugin 'mtth/scratch.vim'
+
 call vundle#end()            " required
+
+set encoding=utf-8
+set nocompatible               " be iMproved
+
+filetype off                   " required!
 
 " Configurations
 """"""""""""""""
@@ -78,16 +68,6 @@ set background=light
 " Wildmenu completion
 """""""""""""""""""""
 set wildmenu
-set wildmode=list:longest
-set wildignore+=.hg,.git,.svn                    " Version control
-set wildignore+=*.aux,*.out,*.toc                " LaTeX intermediate files
-set wildignore+=*.o,*.obj,*.exe,*.dll,*.manifest " compiled object files
-set wildignore+=*.spl                            " compiled spelling word lists
-set wildignore+=*.sw?                            " Vim swap files
-set wildignore+=*.DS_Store                       " OSX bullshit
-set wildignore+=*.luac                           " Lua byte code
-set wildignore+=*.pyc                            " Python byte code
-set wildignore+=**.class                          " Cursed Java class files
 
 " Save when losing focus
 set autowriteall " Auto-save files when switching buffers or leaving vim.
@@ -104,6 +84,11 @@ else
     set background=dark
     colorscheme solarized
 endif
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" STATUS LINE
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+:set statusline=%<%f\ (%{&ft})\ %-4(%m%)%=%-19(%3l,%02c%03V%)
 
 " Basic
 syntax on
@@ -128,6 +113,7 @@ set undolevels=1000      " use many muchos levels of undo
 set title                " change the terminal's title
 set visualbell           " don't beep
 set noerrorbells         " don't beep
+set cursorline
 
 let g:CSSLint_FileTypeList = ['css', 'less', 'sess']
 
@@ -183,23 +169,6 @@ au FileType xml exe ":silent 1,$!xmllint --format --recover - 2>/dev/null"
 " Crontab auto-commands
 """""""""""""""""""""""
 autocmd FileType crontab setlocal backupcopy=yes
-
-" turn-on distraction free writing mode for markdown files
-" au BufNewFile,BufRead *.{md,mdown,mkd,mkdn,markdown,mdwn} call DistractionFreeWriting()
-
-function! DistractionFreeWriting()
-    colorscheme iawriter
-    set background=light
-    set lines=60 columns=100           " size of the editable area
-    set fuoptions=background:#00f5f6f6 " macvim specific setting for editor's background color
-    set guioptions-=r                  " remove right scrollbar
-    set laststatus=2                   " don't show status line
-    set noruler                        " don't show ruler
-    set fullscreen                     " go to fullscreen editing mode
-    set linebreak                      " break the lines on words
-endfunction
-
-:map <F8> :call DistractionFreeWriting()<CR>
 
 " Toggle spellcheck in normal mode
 :map <F5> :setlocal spell! spelllang=en_us<CR>
@@ -335,8 +304,8 @@ set laststatus=2
 
 " Navigation
 set scrolloff=8
-nmap <C-k> 5k
-nmap <C-j> 5j
+nmap K 5k
+nmap J 5j
 
 " Shorcuts
 :imap jj <Esc> " Exit from insert mode
@@ -350,3 +319,88 @@ map ,e :NERDTreeToggle<CR>
 " Bubble multiple lines
 " vmap <C-Up> [egv
 " vmap <C-Down> ]egv
+
+" Move around splits with <c-hjkl>
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-h> <C-w>h
+nnoremap <C-l> <C-w>l
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" OpenChangedFiles COMMAND
+" Open a split for each dirty file in git
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+function! OpenChangedFiles()
+  only " Close all windows, unless they're modified
+  let status = system('git status -s | grep "^ \?\(M\|A\|UU\)" | sed "s/^.\{3\}//"')
+  let filenames = split(status, "\n")
+  exec "edit " . filenames[0]
+  for filename in filenames[1:]
+    exec "sp " . filename
+  endfor
+endfunction
+
+command! OpenChangedFiles :call OpenChangedFiles()
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Diff tab management: open the current git diff in a tab
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+command! GdiffInTab tabedit %|vsplit|Gdiff
+nnoremap <leader>d :GdiffInTab<cr>
+nnoremap <leader>D :tabclose<cr>
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" MAPS TO JUMP TO SPECIFIC COMMAND-T TARGETS AND FILES
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+map <leader>gr :topleft :split config/routes.rb<cr>
+
+function! ShowRoutes()
+  " Requires 'scratch' plugin
+  :topleft 100 :split __Routes__
+  " Make sure Vim doesn't write __Routes__ as a file
+  :set buftype=nofile
+  " Delete everything
+  :normal 1GdG
+  " Put routes output in buffer
+  :0r! rake -s routes
+  " Size window to number of lines (1 plus rake output length)
+  :exec ":normal " . line("$") . "_ "
+  " Move cursor to bottom
+  :normal 1GG
+  " Delete empty trailing line
+  :normal dd
+endfunction
+map <leader>gR :call ShowRoutes()<cr>
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Selecta Mappings
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Run a given vim command on the results of fuzzy selecting from a given shell
+" command. See usage below.
+function! SelectaCommand(choice_command, selecta_args, vim_command)
+  try
+    let selection = system(a:choice_command . " | selecta " . a:selecta_args)
+  catch /Vim:Interrupt/
+    " Swallow the ^C so that the redraw below happens; otherwise there will be
+    " leftovers from selecta on the screen
+    redraw!
+    return
+  endtry
+  redraw!
+  exec a:vim_command . " " . selection
+endfunction
+
+function! SelectaFile(path)
+  call SelectaCommand("find " . a:path . "/* -type f", "", ":e")
+endfunction
+
+nnoremap <leader>f :call SelectaFile(".")<cr>
+nnoremap <leader>gv :call SelectaFile("app/views")<cr>
+nnoremap <leader>gc :call SelectaFile("app/controllers")<cr>
+nnoremap <leader>gm :call SelectaFile("app/models")<cr>
+nnoremap <leader>gh :call SelectaFile("app/helpers")<cr>
+nnoremap <leader>gl :call SelectaFile("lib")<cr>
+nnoremap <leader>gp :call SelectaFile("public")<cr>
+nnoremap <leader>gs :call SelectaFile("public/stylesheets")<cr>
+nnoremap <leader>gf :call SelectaFile("features")<cr>
+
