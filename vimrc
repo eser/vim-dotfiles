@@ -1,3 +1,5 @@
+autocmd!
+
 set rtp+=~/.vim/bundle/Vundle.vim
 
 call vundle#begin()
@@ -56,46 +58,19 @@ Plugin 'mtth/scratch.vim'
 
 call vundle#end()            " required
 
-set encoding=utf-8
-set nocompatible               " be iMproved
-
-filetype off                   " required!
-
-" Configurations
-""""""""""""""""
-set background=light
-
-" Wildmenu completion
-"""""""""""""""""""""
-set wildmenu
-
-" Save when losing focus
-set autowriteall " Auto-save files when switching buffers or leaving vim.
-au FocusLost * silent! :wa
-au TabLeave * silent! :wa
-
-" Resize splits when the window is resized
-au VimResized * exe "normal! \<c-w>="
-
-if !has("gui_running")
-    set background=dark
-    colorscheme desert
-else
-    set background=dark
-    colorscheme solarized
-endif
-
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" STATUS LINE
+" BASIC EDITING CONFIGURATION
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-:set statusline=%<%f\ (%{&ft})\ %-4(%m%)%=%-19(%3l,%02c%03V%)
 
-" Basic
 syntax on
 filetype plugin indent on     " required!
-
-set number        " always show line numbers
+set encoding=utf-8
+set nocompatible               " be iMproved
 set hidden        " Allow un-saved buffers in background
+set wildmenu      " Wildmenu completion
+
+map <leader>y "*y
+set number        " always show line numbers
 set clipboard=unnamed " Share system clipboard.
 set backspace=indent,eol,start " Make backspace behave normally.
 set directory=/tmp// " swap files
@@ -113,7 +88,97 @@ set undolevels=1000      " use many muchos levels of undo
 set title                " change the terminal's title
 set visualbell           " don't beep
 set noerrorbells         " don't beep
-set cursorline
+
+" set cursorline
+
+" hi CursorLine   cterm=NONE ctermbg=darkred ctermfg=white
+" hi CursorLine term=bold cterm=bold guibg=Grey40
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" COLOR
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+set t_Co=256 " 256 colors
+set background=dark
+colorscheme desert
+
+function s:SetCursorLine()
+    hi Cursorline term=reverse cterm=bold ctermbg=darkgrey
+    " hi CursorColumn term=reverse ctermbg=0
+endfunction
+
+" autocmd VimEnter * call s:SetCursorLine()
+
+" Default Tabs & spaces
+set tabstop=4     " a tab is four spaces
+set shiftwidth=4  " number of spaces to use for autoindenting
+set softtabstop=4
+set expandtab
+set shiftround    " use multiple of shiftwidth when indenting with '<' and '>'
+set smarttab      " insert tabs on the start of a line according to
+                  "    shiftwidth, not tabstop
+
+set autoindent    " always set autoindenting on
+set copyindent    " copy the previous indentation on autoindenting
+set smartindent
+
+set cmdheight=1
+set switchbuf=useopen
+" set showtabline=2
+set winwidth=79
+
+set showcmd " display incomplete commands
+
+" set modeline
+" set modelines=3
+
+" Insert only one space when joining lines that contain sentence-terminating
+" punctuation like `.`.
+set nojoinspaces
+
+" If a file is changed outside of vim, automatically reload it without asking
+set autoread
+
+" set wildmode=longest,list " use emacs-style tab completion when selecting files, etc
+
+" General Code Folding
+""""""""""""""""""""""
+set foldmethod=manual
+set nofoldenable
+set foldlevel=99
+
+" Change leader
+let mapleader = ","
+let g:mapleader = ","
+
+set laststatus=2
+" let g:syntastic_enable_signs = 1
+" let g:syntastic_auto_jump = 0
+" let g:syntastic_puppet_lint_disable = 0
+
+" Navigation
+set scrolloff=8
+nmap K 5k
+nmap J 5j
+
+" Shorcuts
+imap jj <Esc>
+map ,w :w!<CR>
+map ,q :q!<CR>
+map ,e :NERDTreeToggle<CR>
+
+" Save when losing focus
+set autowriteall " Auto-save files when switching buffers or leaving vim.
+au FocusLost * silent! :wa
+au TabLeave * silent! :wa
+
+" Resize splits when the window is resized
+au VimResized * exe "normal! \<c-w>="
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" STATUS LINE
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set statusline=%<%f\ (%{&ft})\ %-4(%m%)%=%-19(%3l,%02c%03V%)
 
 let g:CSSLint_FileTypeList = ['css', 'less', 'sess']
 
@@ -125,22 +190,6 @@ endif
 " Special characters for hilighting non-priting spaces/tabs/etc.
 set list listchars=tab:»\ ,trail:·
 
-" Default Tabs & spaces
-set tabstop=4     " a tab is four spaces
-set shiftwidth=4  " number of spaces to use for autoindenting
-set softtabstop=4
-set expandtab
-set shiftround    " use multiple of shiftwidth when indenting with '<' and '>'
-set smarttab      " insert tabs on the start of a line according to
-                  "    shiftwidth, not tabstop
-set autoindent    " always set autoindenting on
-set copyindent    " copy the previous indentation on autoindenting
-set smartindent
-
-" General Code Folding
-""""""""""""""""""""""
-set foldmethod=indent
-set foldlevel=99
 
 " Highlight VCS conflict markers
 """"""""""""""""""""""""""""""""
@@ -151,11 +200,14 @@ match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
 nnoremap / /\v
 vnoremap / /\v
 
-
 " General auto-commands
 """""""""""""""""""""""
 autocmd FileType * setlocal colorcolumn=0
 autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
+
+" Make sure we hilight extra whitespace in the most annoying way possible.
+highlight ExtraWhitespace ctermbg=red guibg=red
+" highlight Normal ctermfg=grey ctermbg=darkblue
 
 " Get rid of trailing whitespace highlighting in mutt.
 autocmd FileType mail highlight clear ExtraWhitespace
@@ -178,37 +230,10 @@ autocmd FileType crontab setlocal backupcopy=yes
 autocmd filetype ruby setlocal expandtab shiftwidth=2 tabstop=2 softtabstop=2
 autocmd Filetype eruby setlocal expandtab shiftwidth=2 tabstop=2
 autocmd FileType cucumber compiler cucumber | setl makeprg=cucumber\ \"%:p\"
-autocmd FileType ruby
-      \ if expand('%') =~# '_test\.rb$' |
-      \   compiler rubyunit | setl makeprg=testrb\ \"%:p\" |
-      \ elseif expand('%') =~# '_spec\.rb$' |
-      \   compiler rspec | setl makeprg=rspec\ \"%:p\" |
-      \ else |
-      \   compiler ruby | setl makeprg=ruby\ -wc\ \"%:p\" |
-      \ endif
-autocmd User Bundler
-            \ if &makeprg !~# 'bundle' | setl makeprg^=bundle\ exec\  | endif
-
-" PHP Configurations
-""""""""""""""""""""
-autocmd FileType php setlocal colorcolumn=100
 
 " HTML configurations
 """""""""""""""""""""
 autocmd FileType html setlocal shiftwidth=2 expandtab tabstop=2 softtabstop=2
-" autocmd FileType htmldjango setlocal shiftwidth=2 expandtab tabstop=2 softtabstop=2
-
-" Python configurations
-"""""""""""""""""""""""
-" autocmd FileType python setlocal shiftwidth=4 expandtab tabstop=4 softtabstop=4
-" autocmd FileType python setlocal colorcolumn=80
-" autocmd FileType python map <buffer> <F4> :call Flake8()<CR>
-" autocmd FileType python autocmd BufWritePre * :%s/\s\+$//e
-" autocmd FileType python set omnifunc=pythoncomplete#Complete
-"
-" autocmd FileType python set ft=python.django " For SnipMate
-" autocmd FileType htmldjango set ft=htmldjango.html " For SnipMate
-" autocmd FileType html set ft=htmldjango.html " For SnipMate
 
 " CSS Configurations
 """""""""""""""""""""""""""""
@@ -232,25 +257,11 @@ let g:html_indent_inctags = "html,body,head,tbody"
 let g:html_indent_script1 = "inc"
 let g:html_indent_style1 = "inc"
 
-" Make sure we hilight extra whitespace in the most annoying way possible.
-highlight ExtraWhitespace ctermbg=red guibg=red
-" highlight Normal ctermfg=grey ctermbg=darkblue
 
 match ExtraWhitespace /\s\+$/
 autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
 autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
 autocmd InsertLeave * match ExtraWhitespace /\s\+$/
-
-" Custom mappings
-""""""""""""""""""
-
-" General
-noremap <silent> <F4> :QFix<CR>
-
-
-" Change leader
-let mapleader = ","
-let g:mapleader = ","
 
 " Get rid of search hilighting with ,/
 nnoremap <silent> <leader>/ :nohlsearch<CR>
@@ -262,17 +273,10 @@ cmap w!! w !sudo tee % >/dev/null
 " Plugin configurations
 """""""""""""""""""""""
 
-" Pyflakes
-"autocmd BufWritePost *.py call Flake8()
-" let g:flake8_ignore="E128,E501"
-" let g:syntastic_python_checker_args='--ignore=E501,E128'
-
-" TaskList
-"map <leader>l <Plug>TaskList
-
 " TagBar
+"""""""""""""""""""""""
 nnoremap <silent> <F2> :TagbarToggle<CR>
-let g:tagbar_ctags_bin = '/usr/local/bin/ctags'
+let g:tagbar_ctags_bin = '/usr/bin/ctags'
 let g:tagbar_autoshowtag = 1
 let g:tagbar_autofocus = 1
 
@@ -283,35 +287,6 @@ let g:ctrlp_user_command = ['.git/', 'cd %s && git ls-files --exclude-standard -
 
 " SnipMate
 let g:snippets_dir = "~/.vim/bundle/snipmate-snippets"
-
-" Sparkup
-" let g:sparkupExecuteMapping = '<c-y>'
-" let g:sparkupNextMapping = '<c-k>'
-
-" Jedi
-" let g:jedi#goto_command = "<leader>g"
-
-" Double rainbow - What does it mean!?
-" au VimEnter * RainbowParenthesesToggle
-" au Syntax * RainbowParenthesesLoadRound
-" au Syntax * RainbowParenthesesLoadSquare
-" au Syntax * RainbowParenthesesLoadBraces
-
-set laststatus=2
-" let g:syntastic_enable_signs = 1
-" let g:syntastic_auto_jump = 0
-" let g:syntastic_puppet_lint_disable = 0
-
-" Navigation
-set scrolloff=8
-nmap K 5k
-nmap J 5j
-
-" Shorcuts
-:imap jj <Esc> " Exit from insert mode
-map ,w :w!<CR>
-map ,q :q!<CR>
-map ,e :NERDTreeToggle<CR>
 
 " Bubble single lines
 " nmap <C-Up> [e
@@ -352,7 +327,6 @@ nnoremap <leader>D :tabclose<cr>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " MAPS TO JUMP TO SPECIFIC COMMAND-T TARGETS AND FILES
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-map <leader>gr :topleft :split config/routes.rb<cr>
 
 function! ShowRoutes()
   " Requires 'scratch' plugin
@@ -371,6 +345,7 @@ function! ShowRoutes()
   :normal dd
 endfunction
 map <leader>gR :call ShowRoutes()<cr>
+map <leader>gr :topleft :split config/routes.rb<cr>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Selecta Mappings
@@ -391,16 +366,72 @@ function! SelectaCommand(choice_command, selecta_args, vim_command)
 endfunction
 
 function! SelectaFile(path)
-  call SelectaCommand("find " . a:path . "/* -type f", "", ":e")
+    call SelectaCommand("find " . a:path . "/* -type f", "", ":e")
 endfunction
+
 
 nnoremap <leader>f :call SelectaFile(".")<cr>
 nnoremap <leader>gv :call SelectaFile("app/views")<cr>
 nnoremap <leader>gc :call SelectaFile("app/controllers")<cr>
 nnoremap <leader>gm :call SelectaFile("app/models")<cr>
-nnoremap <leader>gh :call SelectaFile("app/helpers")<cr>
+nnoremap <leader>gh :call SelectaFile("app/assets")<cr>
 nnoremap <leader>gl :call SelectaFile("lib")<cr>
-nnoremap <leader>gp :call SelectaFile("public")<cr>
-nnoremap <leader>gs :call SelectaFile("public/stylesheets")<cr>
-nnoremap <leader>gf :call SelectaFile("features")<cr>
 
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" RENAME CURRENT FILE
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+function! RenameFile()
+    let old_name = expand('%')
+    let new_name = input('New file name: ', expand('%'), 'file')
+    if new_name != '' && new_name != old_name
+        exec ':saveas ' . new_name
+        exec ':silent !rm ' . old_name
+        redraw!
+    endif
+endfunction
+map <leader>n :call RenameFile()<cr>
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" OPEN FILES IN DIRECTORY OF CURRENT FILE
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+cnoremap %% <C-R>=expand('%:h').'/'<cr>
+map <leader>v :edit %%
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" MULTIPURPOSE TAB KEY
+" Indent if we're at the beginning of a line. Else, do completion.
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+function! InsertTabWrapper()
+    let col = col('.') - 1
+    if !col || getline('.')[col - 1] !~ '\k'
+        return "\<tab>"
+    else
+        return "\<c-p>"
+    endif
+endfunction
+inoremap <tab> <c-r>=InsertTabWrapper()<cr>
+inoremap <s-tab> <c-n>
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Show TIPS
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+function! ShowTips()
+    echo "Rename current file :     <leader>n"
+    echo "Show routes         :     <leader>gR"
+    echo "Open routes         :     <leader>gr"
+    echo "Edit current dir    :     <leader>v"
+    echo "Open gitdiff tab    :     <leader>d"
+    echo "Close gitdiff tab   :     <leader>D"
+    echo "Open changed files  :     OpenChangedFiles"
+    echo "Open rails dir: .                     <leader>f "
+    echo "Open rails dir: app/views             <leader>gv"
+    echo "Open rails dir: app/controllers       <leader>gc"
+    echo "Open rails dir: app/models            <leader>gm"
+    echo "Open rails dir: app/assets            <leader>gh"
+    echo "Open rails dir: lib                   <leader>gl"
+endfunction
+
+nnoremap <leader>tt :call ShowTips()<cr>
